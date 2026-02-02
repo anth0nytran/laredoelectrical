@@ -177,7 +177,7 @@ export default function RootLayout({
             })
           }}
         />
-        {/* Google Analytics 4 */}
+        {/* Google Analytics 4 - TODO: Replace G-XXXXXXXXXX with your real GA4 Measurement ID */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
         <script
           dangerouslySetInnerHTML={{
@@ -189,7 +189,7 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* Google Search Console Verification Placeholder */}
+        {/* Google Search Console - TODO: Replace with your verification code from Search Console */}
         <meta name="google-site-verification" content="Your_Verification_Code_Here" />
       </head>
       <body

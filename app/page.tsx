@@ -3,6 +3,7 @@
 import { useMemo, useState, useEffect, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, ShieldCheck, Star, Menu, X, Award, Clock, Check, ClipboardList, Hammer, ArrowRight } from 'lucide-react';
+import NextImage from 'next/image';
 
 import { ComparisonSlider } from './components/ComparisonSlider';
 import { ImagePlaceholder } from './components/ImagePlaceholder';
@@ -152,6 +153,10 @@ export default function ThreeDFencing() {
   const [formError, setFormError] = useState('');
   const [pageUrl, setPageUrl] = useState('');
 
+  // Lightbox State
+  const [selectedJob, setSelectedJob] = useState<typeof recentJobs[0] | null>(null);
+  const [activeImage, setActiveImage] = useState<string>('');
+
   // Smooth scroll to the quote form in the hero section
   const scrollToQuote = () => {
     const quoteSection = document.getElementById('quote-form');
@@ -235,9 +240,11 @@ export default function ThreeDFencing() {
     'Fully insured for your peace of mind',
   ];
   const recentJobs = [
-    { title: 'Cedar Privacy Fence', meta: 'Houston  -  2 days', result: '300ft with rot board for maximum durability', image: '/images/project-cedar.png', alt: 'New cedar privacy fence installation in Houston' },
-    { title: 'Custom Wrought Iron Gate', meta: 'Katy  -  1 week', result: 'Custom fabricated & professionally installed', image: '/images/project-gate-2.png', alt: 'Custom wrought iron driveway gate in Katy' },
-    { title: 'LiftMaster Operator Install', meta: 'The Woodlands  -  4 hours', result: 'Solar powered automatic gate system', image: '/images/project-liftmaster.png', alt: 'LiftMaster automatic gate opener installation in The Woodlands' },
+    { title: 'Secure Chain Link Fencing', meta: 'Houston  -  2 Days', result: 'Durable, cost-effective security solution', image: '/images/pic1.JPG', alt: 'Galvanized chain link fence installation' },
+    { title: 'Commercial Perimeter Security', meta: 'Sugar Land  -  2 Weeks', result: 'Heavy-duty protection for business assets', image: '/images/pic2.JPG', alt: 'Commercial security fencing project' },
+    { title: 'Premium Cedar Privacy Fence', meta: 'The Woodlands  -  3 Days', result: 'Hand-crafted for beauty and privacy', image: '/images/pic3.JPG', alt: 'Custom cedar wood privacy fence' },
+    { title: 'Modern Interior Railings', meta: 'Katy  -  1 Week', result: 'Sleek custom metalwork design', image: '/images/pic4.JPG', alt: 'Modern custom metal railing installation' },
+    { title: 'Custom Driveway Gate', meta: 'Houston  -  4 Days', result: 'Welded iron gate with custom design', image: '/images/pic5front.jpg', image2: '/images/pic5back.jpg', alt: 'Custom iron driveway gate' },
   ];
 
   const allServices = [
@@ -357,7 +364,7 @@ export default function ThreeDFencing() {
                   {config.businessName}
                 </h1>
                 <p className="text-xl font-bold uppercase tracking-wider" style={{ color: accent }}>
-                  Professional Fence Installation & Custom Gate Fabrication
+                  Houston's Premier Fence Contractor
                 </p>
                 <p className="text-lg leading-relaxed text-slate-300 max-w-lg">
                   Fast response. Quick scheduling. High-quality craftsmanship.<br />
@@ -450,7 +457,7 @@ export default function ThreeDFencing() {
                 <div className="h-1 w-8" style={{ backgroundColor: accent }} />
                 <p className="text-xs font-bold uppercase tracking-widest" style={{ color: t.textMuted }}>Our Capabilities</p>
               </div>
-              <h2 className="text-4xl font-black uppercase tracking-tight" style={{ color: t.textPrimary }}>Professional Fence & Gate Services in {config.city}</h2>
+              <h2 className="text-4xl font-black uppercase tracking-tight" style={{ color: t.textPrimary }}>Our Services</h2>
             </div>
             <p className="text-sm font-medium font-mono border-l-2 pl-4 py-1 max-w-sm" style={{ color: t.textSecondary, borderColor: accent }}>
               Full licensed professionals serving {config.city}.<br />Same-week availability for new clients.
@@ -499,7 +506,7 @@ export default function ThreeDFencing() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border-l-4" style={{ borderColor: accent, backgroundColor: 'rgba(255,255,255,0.05)' }}>
                   <p className="text-xs font-black uppercase tracking-[0.2em] text-white">Why Choose Us</p>
                 </div>
-                <h2 className="text-3xl font-black text-white md:text-5xl leading-[1.1] uppercase tracking-tight">Direct Answers.<br />Fast Scheduling.<br />No Pressure.</h2>
+                <h2 className="text-3xl font-black text-white md:text-5xl leading-[1.1] uppercase tracking-tight">Why Choose Us</h2>
                 <div className="mt-10 space-y-px bg-white/10 border border-white/10">
                   {benefits.map((benefit, i) => (
                     <div key={benefit} className="flex items-center gap-4 p-5 bg-black/40 backdrop-blur-sm group hover:bg-white/5 transition-colors">
@@ -563,12 +570,12 @@ export default function ThreeDFencing() {
       </section>
 
       {/* Project Showcase - Carousel Style */}
-      <section id="work" className="py-16 overflow-hidden" style={{ backgroundColor: t.surfaceBg }}>
+      <section id="work" className="py-24 overflow-hidden" style={{ backgroundColor: t.surfaceBg }}>
         <div className={shellClass}>
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-12">
             <div>
               <p className="text-xs font-bold uppercase tracking-widest mb-1 opacity-60" style={{ color: t.textPrimary }}>Our Portfolio</p>
-              <h2 className="text-3xl font-black md:text-4xl" style={{ color: t.textPrimary }}>Project Showcase</h2>
+              <h2 className="text-4xl font-black md:text-5xl" style={{ color: t.textPrimary }}>Recent Projects</h2>
             </div>
 
             <div className="hidden md:flex gap-2">
@@ -577,33 +584,34 @@ export default function ThreeDFencing() {
             </div>
           </div>
 
-          {/* Snap Scroll Container */}
-          <div className="flex overflow-x-auto pb-8 -mx-4 px-4 gap-6 snap-x md:grid md:grid-cols-3 md:overflow-visible">
-            {/* Hardcoded visual placeholders mixed with data */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-auto flex flex-col group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all">
-              <div className="aspect-[4/3] bg-slate-200 relative">
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(/images/project-gate.png)` }} />
-                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur text-white px-3 py-1 text-xs font-bold rounded uppercase tracking-wide">Before / After</div>
-              </div>
-              <div className="p-6 bg-white flex-1 border-t-4" style={{ borderColor: accent }}>
-                <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Gate Installation</div>
-                <h3 className="text-xl font-black text-slate-900 mb-2">Custom Iron Gate</h3>
-                <p className="text-sm text-slate-600">Designed, fabricated and installed a custom wrought iron driveway gate with automatic opener.</p>
-              </div>
-            </div>
-
+          {/* Snap Scroll Container - Optimized with Next.js Image */}
+          <div className="flex overflow-x-auto pb-8 -mx-4 px-4 gap-8 snap-x md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible">
             {recentJobs.map((job, i) => (
-              <div key={job.title} className="snap-center shrink-0 w-[85vw] md:w-auto flex flex-col group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all">
-                <div className="aspect-[4/3] relative bg-slate-100 flex items-center justify-center overflow-hidden">
-                  <img src={job.image} alt={job.alt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                    <span className="text-white font-bold text-sm flex items-center gap-2"><Check className="h-4 w-4" style={{ color: accent }} /> Verified Job</span>
+              <div
+                key={job.title}
+                className="snap-center shrink-0 w-[85vw] md:w-auto flex flex-col group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer hover:-translate-y-2"
+                onClick={() => { setSelectedJob(job); setActiveImage(job.image); }}
+              >
+                <div className="aspect-[3/2] relative bg-slate-100 flex items-center justify-center overflow-hidden">
+                  <NextImage
+                    src={job.image}
+                    alt={job.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-100 transition-opacity">
+                    <span className="text-white font-bold text-sm flex items-center gap-2">
+                      <div className="bg-white/20 p-1 rounded-full backdrop-blur-sm"><Check className="h-3 w-3 text-white" /></div>
+                      Tap to view
+                    </span>
                   </div>
                 </div>
-                <div className="p-6 bg-white flex-1 border-t-0">
+                <div className="p-6 bg-white flex-1 border-t-0 flex flex-col justify-center">
                   <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">{job.meta.split('-')[0]}</div>
-                  <h3 className="text-xl font-black text-slate-900 mb-2">{job.title}</h3>
-                  <p className="text-sm text-slate-600">{job.result}</p>
+                  <h3 className="text-xl font-black text-slate-900 mb-2 leading-tight group-hover:text-blue-600 transition-colors">{job.title}</h3>
+                  <p className="text-sm text-slate-600 line-clamp-2">{job.result}</p>
                 </div>
               </div>
             ))}
@@ -625,7 +633,7 @@ export default function ThreeDFencing() {
               </div>
               <span className="text-white font-bold ml-1.5 pt-0.5">{ratingText}</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">Client Reviews</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">Customer Reviews</h2>
             <p className="text-slate-400 text-lg max-w-2xl">See what your neighbors in {config.city} are saying about our work.</p>
           </div>
 
@@ -678,7 +686,7 @@ export default function ThreeDFencing() {
         <div className={shellClass}>
           <div className="mb-16 text-center">
             <div className="inline-block border-b-4 border-zinc-900 pb-2 mb-4">
-              <h2 className="text-3xl font-black uppercase tracking-tight text-zinc-900 md:text-4xl">How We Operate</h2>
+              <h2 className="text-3xl font-black uppercase tracking-tight text-zinc-900 md:text-4xl">Our Process</h2>
             </div>
             <p className="text-slate-600 font-medium max-w-2xl mx-auto">Precision planning. Expert execution. Zero mess left behind.</p>
           </div>
@@ -726,7 +734,7 @@ export default function ThreeDFencing() {
           <div className="grid gap-10 md:grid-cols-[0.4fr_0.6fr] md:items-start">
             <div className="md:sticky md:top-24">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: accent }}>FAQ</p>
-              <h2 className="text-2xl font-bold md:text-3xl" style={{ color: t.textPrimary }}>Quick answers before you book.</h2>
+              <h2 className="text-2xl font-bold md:text-3xl" style={{ color: t.textPrimary }}>FAQ</h2>
               <p className="mt-3 text-sm leading-relaxed" style={{ color: t.textMuted }}>Still have questions? Call us directly.</p>
               <a href={`tel:${cleanPhone}`} className="mt-5 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg hover:scale-[1.02]" style={{ backgroundColor: accent, boxShadow: `0 4px 12px ${accent}30` }}><Phone className="h-4 w-4" />{config.phone}</a>
             </div>
@@ -749,7 +757,7 @@ export default function ThreeDFencing() {
       <section id="home-cta" className="py-16 border-t-3" style={{ borderColor: accent, backgroundColor: accent }}>
         <div className={`${shellClass} flex flex-col gap-6 md:flex-row md:items-center md:justify-between`}>
           <div>
-            <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl text-white">Ready to Start?</h2>
+            <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl text-white">Get Your Free Quote</h2>
             <p className="mt-4 text-xl font-bold text-white">Free estimate - Custom Designs - Durable Results</p>
             <p className="mt-2 text-base font-medium text-white/90">Serving {config.city} and surrounding areas</p>
           </div>
@@ -760,24 +768,67 @@ export default function ThreeDFencing() {
         </div>
       </section>
 
-      <footer className="py-8 mt-12" style={{ borderTop: `1px solid ${t.border}` }}>
-        <div className={`${shellClass} flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left`}>
+      <footer className="bg-zinc-950 text-white pt-16 pb-8 border-t-4" style={{ borderColor: accent }}>
+        <div className={shellClass}>
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 mb-12">
 
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-center md:justify-start gap-3 text-xs font-bold" style={{ color: t.textPrimary }}>
-              <span>{config.businessName}</span>
-              <span className="opacity-30">|</span>
-              <span>(281) 748-1111</span>
+            {/* Brand Column */}
+            <div className="lg:col-span-1">
+              <div className="flex items-center gap-3 mb-5">
+                <img src="/images/reallogo.svg" alt={config.businessName} className="h-10 w-auto brightness-0 invert" />
+                <span className="text-lg font-black uppercase tracking-tight">{config.businessName}</span>
+              </div>
+              <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
+                Built on integrity. 15+ years fabricating fences and gates across Houston.
+              </p>
             </div>
-            <p className="text-[11px] leading-relaxed max-w-lg opacity-60" style={{ color: t.textMuted }}>
-              Proudly serving Houston, Katy, The Woodlands, Sugar Land, Cypress, Missouri City, Richmond, and surrounding areas in Texas.
-            </p>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest mb-5 text-zinc-500">Navigate</h4>
+              <ul className="space-y-3 text-sm text-zinc-400">
+                <li><a href="#services" className="hover:text-white transition-colors">Our Services</a></li>
+                <li><a href="#why-us" className="hover:text-white transition-colors">Why 3D Fence</a></li>
+                <li><a href="#work" className="hover:text-white transition-colors">Project Gallery</a></li>
+                <li><a href="#proof" className="hover:text-white transition-colors">Reviews</a></li>
+                <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
+              </ul>
+            </div>
+
+            {/* Services SEO */}
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest mb-5 text-zinc-500">What We Build</h4>
+              <ul className="space-y-3 text-sm text-zinc-400">
+                <li>Wood & Cedar Fencing</li>
+                <li>Wrought Iron Gates</li>
+                <li>Chain Link & Security</li>
+                <li>Gate Automation</li>
+                <li>Custom Welding & Repair</li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest mb-5 text-zinc-500">Get In Touch</h4>
+              <ul className="space-y-4 text-sm text-zinc-400">
+                <li>
+                  <a href={`tel:${cleanPhone}`} className="text-xl font-black text-white hover:opacity-80 transition-opacity">{config.phone}</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <span>Available 24/7</span>
+                </li>
+                <li className="text-zinc-600 text-xs pt-2">Houston • Katy • Sugar Land • The Woodlands</li>
+              </ul>
+            </div>
           </div>
 
-          <a href="https://quicklaunchweb.us" target="_blank" rel="noopener noreferrer" className="text-[10px] font-semibold opacity-40 hover:opacity-100 transition-opacity uppercase tracking-wider" style={{ color: t.textSecondary }}>
-            Website by QuickLaunchWeb
-          </a>
-
+          <div className="pt-6 border-t border-zinc-800/50 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-zinc-700 uppercase tracking-widest">
+            <p>&copy; {new Date().getFullYear()} {config.businessName}</p>
+            <a href="https://quicklaunchweb.us" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-500 transition-colors">
+              Site by QuickLaunchWeb
+            </a>
+          </div>
         </div>
       </footer>
 
@@ -787,6 +838,113 @@ export default function ThreeDFencing() {
           <button type="button" className="flex-1 rounded px-3 py-3 text-sm font-black text-white uppercase tracking-wide shadow-lg transition-all" style={{ backgroundColor: accent }} onClick={scrollToQuote}>Get Quote</button>
         </div>
       </div>
+
+      {/* Lightbox Modal - Optimized */}
+      <AnimatePresence>
+        {selectedJob && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-slate-900/90" // Removed expensive backdrop-blur
+            onClick={() => setSelectedJob(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
+            >
+              <button
+                onClick={() => setSelectedJob(null)}
+                className="absolute top-4 right-4 z-50 p-2 bg-white/80 backdrop-blur text-slate-900 rounded-full hover:bg-slate-100 transition-colors shadow-sm"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              {/* Image Side - Optimized */}
+              <div className="w-full md:w-[65%] bg-slate-100 flex flex-col items-center justify-center relative min-h-[40vh] md:min-h-[80vh] overflow-hidden">
+                {/* Main Image */}
+                <div className="relative w-full h-full p-4">
+                  <NextImage
+                    key={activeImage}
+                    src={activeImage || selectedJob.image}
+                    alt={selectedJob.alt}
+                    fill
+                    className="object-contain p-4"
+                    sizes="(max-width: 768px) 100vw, 65vw"
+                    priority // Priority loading for the main image
+                  />
+                </div>
+
+                {/* If there's a second image, show thumbnails */}
+                {'image2' in selectedJob && selectedJob.image2 && (
+                  <div className="absolute bottom-4 left-4 right-4 flex gap-2 justify-center z-20">
+                    <div className="flex gap-2 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg">
+                      {/* Front View Thumb */}
+                      <div
+                        onClick={(e) => { e.stopPropagation(); setActiveImage(selectedJob.image); }}
+                        className={`cursor-pointer rounded overflow-hidden relative w-24 h-16 transition-all ${activeImage === selectedJob.image ? 'ring-2 ring-amber-500 opacity-100' : 'opacity-60 hover:opacity-100'}`}
+                      >
+                        <NextImage src={selectedJob.image} alt="Front view" fill className="object-cover" sizes="100px" />
+                      </div>
+
+                      {/* Back View Thumb */}
+                      <div
+                        onClick={(e) => { e.stopPropagation(); setActiveImage(selectedJob.image2 as string); }}
+                        className={`cursor-pointer rounded overflow-hidden relative w-24 h-16 transition-all ${activeImage === selectedJob.image2 ? 'ring-2 ring-amber-500 opacity-100' : 'opacity-60 hover:opacity-100'}`}
+                      >
+                        <NextImage src={selectedJob.image2} alt="Back view" fill className="object-cover" sizes="100px" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Info Side */}
+              <div className="w-full md:w-[35%] p-8 flex flex-col justify-center bg-white">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <div className="h-0.5 w-6" style={{ backgroundColor: accent }} />
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Verified Project</span>
+                </div>
+
+                <h3 className="text-2xl md:text-3xl font-black uppercase leading-tight mb-4 text-slate-900">{selectedJob.title}</h3>
+                <p className="text-sm font-medium text-slate-500 mb-8 leading-relaxed">{selectedJob.alt}</p>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="p-2 rounded bg-slate-50"><Clock className="h-5 w-5 text-slate-400" /></div>
+                    <div>
+                      <span className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Timeline</span>
+                      <span className="text-base font-bold text-slate-900">{selectedJob.meta.split('-').pop()?.trim()}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="p-2 rounded bg-slate-50"><Check className="h-5 w-5 text-slate-400" /></div>
+                    <div>
+                      <span className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Result</span>
+                      <span className="text-base font-bold text-slate-900">{selectedJob.result}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-8 border-t border-slate-100">
+                  <button
+                    onClick={() => { setSelectedJob(null); scrollToQuote(); }}
+                    className="w-full py-4 text-white font-bold uppercase tracking-wide rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                    style={{ backgroundColor: accent }}
+                  >
+                    Get a Similar Quote
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
