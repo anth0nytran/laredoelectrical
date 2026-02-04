@@ -1,23 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Soft Dark Mode Palette - Black / Silver / Blue */
+  --background: #09090b;
+  /* Zinc 950 - True Blackish */
+  --foreground: #e4e4e7;
+  /* Zinc 200 - Silver */
+
+  /* Primary Accent - Blue */
+  --primary: #3b82f6;
+  /* Blue 500 */
+  --primary-foreground: #ffffff;
+
+  /* Secondary / Surface */
+  --secondary: #18181b;
+  /* Zinc 900 */
+  --secondary-foreground: #d4d4d8;
+  /* Zinc 300 - Silver */
+
+  /* Muted */
+  --muted: #27272a;
+  /* Zinc 800 */
+  --muted-foreground: #a1a1aa;
+  /* Zinc 400 - Muted Silver */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* We want dark mode by default, so we won't use a media query to flip it back to light unless explicitly requested later */
 
 body {
   background: var(--background);

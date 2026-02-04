@@ -13,36 +13,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.3dfencing.com'),
-  title: "3D Fence & Welding | Houston Fence Installation & Custom Gates | (281) 748-1111",
-  description: "Houston's trusted fence company for 15+ years. Cedar fence installation, custom iron gates, automatic driveway gates & LiftMaster openers. Serving Katy, The Woodlands, Sugar Land. Free estimates!",
-  keywords: ["Fence Installation Houston", "Driveway Gates", "Automatic Gate Openers", "Wrought Iron Fences", "Cedar Fencing", "Welding Services Houston", "Fence Repair"],
+  metadataBase: new URL('https://www.landeros-electrical.com'),
+  title: "Houston Residential Electrician | Panel Upgrades & Emergency Repairs | Landeros Electrical",
+  description: "Houston's trusted home electrician. Emergency repairs, panel upgrades & preventative maintenance. Honest pricing, no surprises. Licensed & insured. Call (832) 812-0189.",
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: "3D Fence & Welding | Houston's Experts in Fencing & Automatic Gates",
-    description: "Premier Houston fence contractor specializing in custom driveway gates, automatic gate openers, wood privacy fences, and professional welding fabrication. 15+ years experience.",
-    url: 'https://www.3dfencing.com',
-    siteName: '3D Fence & Welding',
-    locale: 'en_US',
-    type: 'website',
+    title: "Houston Residential Electrician | Landeros Electrical Services",
+    description: "Expert home electrical service in Houston. Emergency repairs, panel upgrades & generator installation. Honest pricing guaranteed.",
+    url: 'https://www.landeros-electrical.com',
+    siteName: 'Landeros Electrical Services',
     images: [
       {
-        url: '/images/reallogo.png',
+        url: '/images/laredohero.jpg',
         width: 1200,
         height: 630,
-        alt: '3D Fence & Welding Logo',
+        alt: 'Landeros Electrical Services - Houston Electrician',
       },
     ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "3D Fence & Welding | Houston's Trust Fence Contractor",
-    description: "Expert fence installation, custom gates, and welding services in Houston, TX. Licensed & Insured.",
-    images: ['/images/reallogo.png'],
+    title: "Houston Residential Electrician | Landeros Electrical",
+    description: "Emergency repairs, panel upgrades & generator installation. Honest pricing guaranteed. Call (832) 812-0189.",
+    images: ['/images/laredohero.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
-    icon: '/images/reallogo.svg',
-    shortcut: '/images/reallogo.svg',
-    apple: '/images/reallogo.svg',
+    icon: [
+      { url: '/images/reallaredo.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
+    ],
+    apple: '/images/reallaredo.svg',
   },
 };
 
@@ -59,13 +74,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "3D Fence & Welding",
-              "image": "https://www.3dfencing.com/images/hero-bg.png",
-              "@id": "https://www.3dfencing.com",
-              "url": "https://www.3dfencing.com",
-              "telephone": "+12817481111",
-              "description": "Houston's trusted fence company for 15+ years. Cedar fence installation, custom iron gates, automatic driveway gates & LiftMaster openers.",
+              "@type": "Electrician",
+              "name": "Landeros Electrical Services",
+              "image": "https://www.landeros-electrical.com/images/reallaredo.svg",
+              "logo": "https://www.landeros-electrical.com/images/reallaredo.svg",
+              "url": "https://www.landeros-electrical.com",
+              "telephone": "+18328120189",
+              "description": "Houston's trusted electrician. Professional service upgrades, generator installation, and troubleshooting.",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Houston Area",
@@ -79,99 +94,45 @@ export default function RootLayout({
                 "latitude": 29.7604,
                 "longitude": -95.3698
               },
-              "areaServed": [
-                {
-                  "@type": "City",
-                  "name": "Houston",
-                  "@id": "https://en.wikipedia.org/wiki/Houston"
-                },
-                {
-                  "@type": "City",
-                  "name": "Katy"
-                },
-                {
-                  "@type": "City",
-                  "name": "The Woodlands"
-                },
-                {
-                  "@type": "City",
-                  "name": "Sugar Land"
-                },
-                {
-                  "@type": "City",
-                  "name": "Cypress"
-                },
-                {
-                  "@type": "City",
-                  "name": "Missouri City"
-                },
-                {
-                  "@type": "City",
-                  "name": "Richmond"
-                }
-              ],
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                  "Sunday"
-                ],
-                "opens": "00:00",
-                "closes": "23:59"
-              },
-              "sameAs": [
-                "https://www.google.com/search?q=3D+Fence+%26+Welding+Houston"
-              ],
-              "priceRange": "$$",
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": "5.0",
-                "reviewCount": "48"
+                "ratingValue": "4.8",
+                "reviewCount": "48",
+                "bestRating": "5",
+                "worstRating": "1"
               },
+              "areaServed": [
+                { "@type": "City", "name": "Houston" },
+                { "@type": "City", "name": "Katy" },
+                { "@type": "City", "name": "Sugar Land" },
+                { "@type": "City", "name": "Richmond" },
+                { "@type": "City", "name": "Cypress" },
+                { "@type": "City", "name": "The Woodlands" }
+              ],
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                  "opens": "08:00",
+                  "closes": "17:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "Saturday",
+                  "opens": "08:00",
+                  "closes": "12:00"
+                }
+              ],
+              "priceRange": "$$",
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "Fence and Gate Services",
+                "name": "Electrical Services",
                 "itemListElement": [
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Fence Installation & Custom Gates"
-                    }
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Automatic Driveway Gates"
-                    }
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Electric Gate Openers"
-                    }
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Commercial & Residential Welding"
-                    }
-                  },
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "Fence Repair & Maintenance"
-                    }
-                  }
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Service Panel Upgrades" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generator Installation" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrical Troubleshooting" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Emergency Repairs" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "EV Charger Installation" } }
                 ]
               }
             })

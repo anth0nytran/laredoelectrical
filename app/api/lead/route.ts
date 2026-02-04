@@ -112,7 +112,7 @@ export async function POST(req: Request) {
   }).format(new Date());
   const safeName = name || 'Website Form';
   const safeService = service || 'Website Form';
-  const subject = `🚨 New Lead 🚨 ${safeService} | ${safeName}`;
+  const subject = `⚡ New Lead ⚡ ${safeService} | ${safeName}`;
 
   const pageUrlIsDev =
     !!page &&
@@ -144,19 +144,22 @@ export async function POST(req: Request) {
 
   const text = textLines.join('\n');
   const escapedMessage = message ? escapeHtml(message).replace(/\n/g, '<br />') : '';
+
+  // Landeros Electrical themed email - Blue accent (#3b82f6), dark professional look
+  const accentColor = '#3b82f6';
   const html = `
-  <div style="background-color:#f3f4f6;margin:0;padding:24px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111827;">
+  <div style="background-color:#18181b;margin:0;padding:24px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#f4f4f5;">
     <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden;">
       New quote request from ${escapeHtml(safeName)} — tap to call now.
     </span>
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 25px rgba(17,24,39,0.08);overflow:hidden;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;margin:0 auto;background:#09090b;border:1px solid #27272a;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,0.3);overflow:hidden;">
       <tr>
-        <td style="background:#ffffff;color:#111827;padding:18px 20px;border-top:6px solid #ff7a00;border-bottom:1px solid #f1f5f9;">
+        <td style="background:#09090b;color:#f4f4f5;padding:18px 20px;border-top:6px solid ${accentColor};border-bottom:1px solid #27272a;">
           <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
             <tr>
-              <td style="font-size:16px;font-weight:700;letter-spacing:0.3px;">3D Fencing &amp; Gate</td>
+              <td style="font-size:16px;font-weight:700;letter-spacing:0.3px;color:#f4f4f5;">⚡ Landeros Electrical</td>
               <td align="right">
-                <span style="display:inline-block;background:#ff7a00;color:#111827;font-weight:700;font-size:12px;padding:6px 10px;border-radius:999px;letter-spacing:1px;">NEW LEAD</span>
+                <span style="display:inline-block;background:${accentColor};color:#ffffff;font-weight:700;font-size:12px;padding:6px 10px;border-radius:999px;letter-spacing:1px;">NEW LEAD</span>
               </td>
             </tr>
           </table>
@@ -164,9 +167,9 @@ export async function POST(req: Request) {
       </tr>
       <tr>
         <td style="padding:24px 20px 16px;">
-          <div style="font-size:24px;font-weight:800;margin:0 0 6px;">${escapeHtml(safeName)}</div>
-          <div style="font-size:16px;color:#374151;font-weight:600;margin:0 0 4px;">${escapeHtml(safeService)}</div>
-          <div style="font-size:12px;color:#6b7280;">${escapeHtml(timestamp)}</div>
+          <div style="font-size:24px;font-weight:800;margin:0 0 6px;color:#f4f4f5;">${escapeHtml(safeName)}</div>
+          <div style="font-size:16px;color:${accentColor};font-weight:600;margin:0 0 4px;">${escapeHtml(safeService)}</div>
+          <div style="font-size:12px;color:#a1a1aa;">${escapeHtml(timestamp)}</div>
         </td>
       </tr>
       <tr>
@@ -174,20 +177,20 @@ export async function POST(req: Request) {
           <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
             <tr>
               <td style="padding:0 0 10px;">
-                <a href="tel:${escapeHtml(phoneLink || phone)}" style="display:block;background:#ff7a00;color:#111827;text-decoration:none;font-weight:800;font-size:14px;text-align:center;padding:14px 18px;border-radius:10px;">
-                  Hold to Call Lead
+                <a href="tel:${escapeHtml(phoneLink || phone)}" style="display:block;background:${accentColor};color:#ffffff;text-decoration:none;font-weight:800;font-size:14px;text-align:center;padding:14px 18px;border-radius:10px;">
+                  📞 Call Lead Now
                 </a>
               </td>
             </tr>
             <tr>
               <td style="padding:0 0 10px;">
-                <a href="mailto:${escapeHtml(email)}" style="display:block;background:#111827;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;text-align:center;padding:14px 18px;border-radius:10px;">Email Lead</a>
+                <a href="mailto:${escapeHtml(email)}" style="display:block;background:#27272a;color:#f4f4f5;text-decoration:none;font-weight:700;font-size:14px;text-align:center;padding:14px 18px;border-radius:10px;border:1px solid #3f3f46;">Email Lead</a>
               </td>
             </tr>
             ${pageUrlDisplay ? `
             <tr>
               <td style="padding:0;">
-                <a href="${page}" style="font-size:12px;color:#ff7a00;text-decoration:none;">View Page</a>
+                <a href="${page}" style="font-size:12px;color:${accentColor};text-decoration:none;">View Page</a>
               </td>
             </tr>
             ` : ''}
@@ -196,24 +199,24 @@ export async function POST(req: Request) {
       </tr>
       <tr>
         <td style="padding:0 20px 20px;">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #27272a;border-radius:12px;overflow:hidden;">
             <tr>
-              <td style="background:#f9fafb;padding:14px 16px;font-weight:700;border-bottom:1px solid #e5e7eb;">Lead Details</td>
+              <td style="background:#18181b;padding:14px 16px;font-weight:700;border-bottom:1px solid #27272a;color:#f4f4f5;">Lead Details</td>
             </tr>
             <tr>
-              <td style="padding:0 16px;">
+              <td style="padding:0 16px;background:#09090b;">
                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="font-size:14px;">
-                  <tr><td style="padding:10px 0;color:#6b7280;width:120px;">Name</td><td style="padding:10px 0;color:#111827;font-weight:600;">${escapeHtml(safeName)}</td></tr>
-                  <tr><td style="padding:10px 0;color:#6b7280;">Phone</td><td style="padding:10px 0;"><a href="tel:${escapeHtml(phoneLink || phone)}" style="color:#111827;text-decoration:none;font-weight:600;">${escapeHtml(phone)}</a></td></tr>
-                  <tr><td style="padding:10px 0;color:#6b7280;">Email</td><td style="padding:10px 0;"><a href="mailto:${escapeHtml(email)}" style="color:#111827;text-decoration:none;font-weight:600;">${escapeHtml(email)}</a></td></tr>
-                  <tr><td style="padding:10px 0;color:#6b7280;">Service</td><td style="padding:10px 0;color:#111827;font-weight:600;">${escapeHtml(safeService)}</td></tr>
-                  ${pageUrlDisplay ? `<tr><td style="padding:10px 0;color:#6b7280;">Page URL</td><td style="padding:10px 0;"><a href="${page}" style="color:#ff7a00;text-decoration:none;">${escapeHtml(pageUrlDisplay)}</a></td></tr>` : ''}
-                  ${site ? `<tr><td style="padding:10px 0;color:#6b7280;">Site</td><td style="padding:10px 0;"><a href="${escapeHtml(site)}" style="color:#ff7a00;text-decoration:none;">${escapeHtml(site)}</a></td></tr>` : ''}
-                  ${company ? `<tr><td style="padding:10px 0;color:#6b7280;">Company</td><td style="padding:10px 0;color:#111827;font-weight:600;">${escapeHtml(company)}</td></tr>` : ''}
+                  <tr><td style="padding:10px 0;color:#a1a1aa;width:120px;">Name</td><td style="padding:10px 0;color:#f4f4f5;font-weight:600;">${escapeHtml(safeName)}</td></tr>
+                  <tr><td style="padding:10px 0;color:#a1a1aa;">Phone</td><td style="padding:10px 0;"><a href="tel:${escapeHtml(phoneLink || phone)}" style="color:#f4f4f5;text-decoration:none;font-weight:600;">${escapeHtml(phone)}</a></td></tr>
+                  <tr><td style="padding:10px 0;color:#a1a1aa;">Email</td><td style="padding:10px 0;"><a href="mailto:${escapeHtml(email)}" style="color:#f4f4f5;text-decoration:none;font-weight:600;">${escapeHtml(email)}</a></td></tr>
+                  <tr><td style="padding:10px 0;color:#a1a1aa;">Service</td><td style="padding:10px 0;color:${accentColor};font-weight:600;">${escapeHtml(safeService)}</td></tr>
+                  ${pageUrlDisplay ? `<tr><td style="padding:10px 0;color:#a1a1aa;">Page URL</td><td style="padding:10px 0;"><a href="${page}" style="color:${accentColor};text-decoration:none;">${escapeHtml(pageUrlDisplay)}</a></td></tr>` : ''}
+                  ${site ? `<tr><td style="padding:10px 0;color:#a1a1aa;">Site</td><td style="padding:10px 0;"><a href="${escapeHtml(site)}" style="color:${accentColor};text-decoration:none;">${escapeHtml(site)}</a></td></tr>` : ''}
+                  ${company ? `<tr><td style="padding:10px 0;color:#a1a1aa;">Company</td><td style="padding:10px 0;color:#f4f4f5;font-weight:600;">${escapeHtml(company)}</td></tr>` : ''}
                   <tr>
-                    <td style="padding:10px 0;color:#6b7280;vertical-align:top;">Message</td>
-                    <td style="padding:10px 0;color:#111827;">
-                      ${escapedMessage ? `<div style="font-weight:500;">${escapedMessage}</div>` : `<div style="font-style:italic;color:#6b7280;">No message provided.</div>`}
+                    <td style="padding:10px 0;color:#a1a1aa;vertical-align:top;">Message</td>
+                    <td style="padding:10px 0;color:#f4f4f5;">
+                      ${escapedMessage ? `<div style="font-weight:500;">${escapedMessage}</div>` : `<div style="font-style:italic;color:#a1a1aa;">No message provided.</div>`}
                     </td>
                   </tr>
                 </table>
@@ -224,9 +227,9 @@ export async function POST(req: Request) {
       </tr>
       <tr>
         <td style="padding:0 20px 22px;">
-          <div style="border-left:4px solid #ff7a00;padding:10px 12px;background:#f9fafb;border-radius:8px;font-size:12px;color:#6b7280;">
-            This lead came from your website form.
-            <span style="display:block;margin-top:4px;color:#9ca3af;">Powered by QuickLaunchWeb</span>
+          <div style="border-left:4px solid ${accentColor};padding:10px 12px;background:#18181b;border-radius:8px;font-size:12px;color:#a1a1aa;">
+            This lead came from the Landeros Electrical website form.
+            <span style="display:block;margin-top:4px;color:#52525b;">Powered by QuickLaunchWeb</span>
           </div>
         </td>
       </tr>
@@ -240,7 +243,7 @@ export async function POST(req: Request) {
     : undefined;
 
   const { error } = await resend.emails.send({
-    from: '3D Fencing & Gate | New Lead <leads@quicklaunchweb.us>',
+    from: 'Landeros Electrical | New Lead <leads@quicklaunchweb.us>',
     to: [toEmail],
     bcc,
     replyTo: email || undefined,
