@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.landeros-electrical.com'),
+  metadataBase: new URL('https://www.landersoelectrical.com'),
   title: "Houston Electrician | Panel Upgrades, Lighting & Generators | Landeros Electrical",
   description: "Houston's trusted electrician for panel upgrades, lighting installation, generators & emergency repairs. Serving Pearland, Pasadena, Sugar Land & Bay Area. Call (832) 812-0189.",
   keywords: ["Houston Electrician", "Panel Upgrade", "Generator Installation", "Lighting Installation", "Electrical Repair", "South Houston Electrician", "Pearland Electrician", "Pasadena Electrician", "League City Electrician", "Sugar Land Electrician"],
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Houston Electrician | Lighting, Panels & Generators | Landeros Electrical",
     description: "Expert home electrical service in Houston & Bay Area. Emergency repairs, lighting design, panel upgrades & generators. Licensed & insured.",
-    url: 'https://www.landeros-electrical.com',
+    url: 'https://www.landersoelectrical.com',
     siteName: 'Landeros Electrical Services',
     images: [
       {
@@ -77,9 +77,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Electrician",
               "name": "Landeros Electrical Services",
-              "image": "https://www.landeros-electrical.com/images/reallaredo.svg",
-              "logo": "https://www.landeros-electrical.com/images/reallaredo.svg",
-              "url": "https://www.landeros-electrical.com",
+              "image": "https://www.landersoelectrical.com/images/reallaredo.svg",
+              "logo": "https://www.landersoelectrical.com/images/reallaredo.svg",
+              "url": "https://www.landersoelectrical.com",
               "telephone": "+18328120189",
               "description": "Houston's trusted electrician. Professional service upgrades, lighting installation, generator solutions, and troubleshooting.",
               "address": {

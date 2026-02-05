@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://www.landeros-electrical.com/sitemap.xml',
+        sitemap: 'https://www.landersoelectrical.com/sitemap.xml',
     };
 }
