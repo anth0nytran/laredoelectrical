@@ -143,7 +143,7 @@ const config = {
     },
     {
       q: 'What areas do you service?',
-      a: 'We serve Houston and all surrounding communities including Katy, Sugar Land, Richmond, Cypress, and The Woodlands.',
+      a: 'We serve Houston and all surrounding communities including South Houston, Sugar Land, Deer Park, La Porte, Pasadena, Webster, Pearland, League City, Clear Lake, Park Place, Alvin, Brookside Village, and Manvel.',
     },
     {
       q: 'Do you handle emergency repairs?',
@@ -209,14 +209,14 @@ export default function LanderosElectrical() {
 
 
   const recentJobs = [
-    { title: 'Main Panel Upgrade', meta: 'Houston', result: 'Upgraded to 200A service for modern capacity', image: '/images/gallery/20230320_094641 - Landeros Electrical.jpg', alt: 'Electrical panel upgrade', orientation: 'horizontal' },
-    { title: 'Whole Home Generator', meta: 'Katy', result: 'Full backup power installation', image: '/images/gallery/20240130_143047 - Landeros Electrical.jpg', alt: 'Standby generator installation', orientation: 'horizontal' },
-    { title: 'Kitchen Lighting Remodel', meta: 'Sugar Land', result: 'Modern LED recessed lighting install', image: '/images/gallery/20250315_142330 - Landeros Electrical.jpg', alt: 'Recessed lighting installation', orientation: 'horizontal' },
-    { title: 'Commercial Service Call', meta: 'Houston', result: 'Troubleshooting and repair of parking lot lights', image: '/images/gallery/20250408_113509 - Landeros Electrical.jpg', alt: 'Commercial electrical repair', orientation: 'vertical' },
+    { title: 'New Construction Service', meta: 'Houston', result: 'Comprehensive electrical wiring and system design for new custom homes.', image: '/images/gallery/20230320_094641 - Landeros Electrical.jpg', alt: 'New construction electrical service', orientation: 'horizontal' },
+    { title: 'Panel Upgrade', meta: 'Pearland', result: 'Generator inlet installation with interlock kit for safe backup power.', image: '/images/gallery/20240130_143047 - Landeros Electrical.jpg', alt: 'Panel upgrade with generator inlet', orientation: 'horizontal' },
+    { title: 'Underground Service Repair', meta: 'Pasadena', result: 'Repair and replacement of damaged underground service lateral lines.', image: '/images/gallery/20250315_142330 - Landeros Electrical.jpg', alt: 'Underground service repair', orientation: 'horizontal' },
+    { title: 'Service Upgrade', meta: 'Sugar Land', result: 'Heavy-up service upgrade to 200A capacity for modern load demands.', image: '/images/gallery/20250408_113509 - Landeros Electrical.jpg', alt: 'Service upgrade', orientation: 'vertical' },
     { title: 'New Construction Wiring', meta: 'Richmond', result: 'Complete home wiring from rough-in to trim', image: '/images/gallery/20250522_120741 - Landeros Electrical.jpg', alt: 'New home electrical wiring', orientation: 'horizontal' },
-    { title: 'Landscape Lighting', meta: 'The Woodlands', result: 'Enhanced curb appeal with pathway lighting', image: '/images/gallery/20250731_150404 - Landeros Electrical.jpg', alt: 'Landscape lighting installation', orientation: 'horizontal' },
-    { title: 'EV Charger Install', meta: 'Cypress', result: 'Level 2 charger installation for Tesla', image: '/images/gallery/20251229_151027 - Landeros Electrical.jpg', alt: 'EV Job', orientation: 'vertical' },
-    { title: 'Office Retrofit', meta: 'Houston', result: 'LED upgrades for improved efficiency', image: '/images/gallery/20260122_151001 - Landeros Electrical.jpg', alt: 'Office lighting retrofit', orientation: 'horizontal' },
+    { title: 'Automatic Transfer Switch', meta: 'League City', result: 'Installation of automatic transfer switch for seamless generator operation.', image: '/images/gallery/20250731_150404 - Landeros Electrical.jpg', alt: 'Automatic transfer switch', orientation: 'horizontal' },
+    { title: 'Mobile Home Pole Replacement', meta: 'South Houston', result: 'Emergency replacement of damaged mobile home service poles.', image: '/images/gallery/20251229_151027 - Landeros Electrical.jpg', alt: 'Mobile home pole replacement', orientation: 'vertical' },
+    { title: 'Generator Installation', meta: 'Pearland', result: 'Turnkey standby generator installation for whole-home blackout protection.', image: '/images/gallery/20260122_151001 - Landeros Electrical.jpg', alt: 'Generator installation', orientation: 'horizontal' },
   ];
 
   // Lightbox State
@@ -325,21 +325,28 @@ export default function LanderosElectrical() {
     {
       name: 'Residential Service & Repair',
       image: '/images/service-panel.png',
-      desc: 'Complete electrical solutions for Houston homeowners — from quick fixes to major upgrades.',
+      desc: 'Complete electrical solutions for Houston homeowners — from new construction wiring and mobile home poles to underground repairs.',
       alt: 'Residential electrical service',
-      subItems: ['Premium Emergency Service', 'Preventative Maintenance Contracts', 'Panel Upgrades']
+      subItems: ['Breaker Boxes & Meter Sockets', 'Wiring Upgrades & Panel Repair', 'Outlet & Switch Installation']
+    },
+    {
+      name: 'Lighting & Fixtures',
+      image: '/images/service-light.png',
+      desc: 'Interior and exterior lighting solutions — from chandeliers and ceiling fans to LED upgrades and landscape lighting.',
+      alt: 'Lighting and fixture installation',
+      subItems: ['LED & Recessed Lighting', 'Chandeliers & Ceiling Fans', 'Landscape & Security Lighting']
     },
     {
       name: 'Generator Services',
       image: '/images/service-generator.png',
       desc: 'Keep your family safe and comfortable when Houston storms knock out the power.',
       alt: 'Home standby generator installation',
-      subItems: ['Whole-Home Generator Installation', 'Backup Power Systems', 'Generator Maintenance']
+      subItems: ['Whole-Home Generator Installation', 'Automatic Transfer Switches (ATS)', 'Generator Maintenance']
     },
     {
       name: 'Commercial Electrical',
       image: '/images/service-troubleshooting.png',
-      desc: 'Professional electrical services for Houston businesses — safe, code-compliant, and reliable.',
+      desc: 'Professional electrical services — new construction wiring, lighting retrofits, and code compliance.',
       alt: 'Commercial electrical service',
       subItems: ['Office & Retail Wiring', 'Lighting Retrofits', 'Electrical Code Compliance']
     }
@@ -528,7 +535,7 @@ export default function LanderosElectrical() {
               Trusted by Houston homeowners.<br />Honest pricing on every job.
             </p>
           </div>
-          <motion.div variants={staggerSoft} initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.3 }} className="grid gap-8 md:grid-cols-3">
+          <motion.div variants={staggerSoft} initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.3 }} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {allServices.map((service, i) => (
               <motion.div key={service.name} className="group flex flex-col justify-between overflow-hidden shadow-sm transition-all hover:shadow-xl hover:-translate-y-1" style={{ backgroundColor: t.cardBg, border: `1px solid ${t.border}` }}>
                 {/* Service Image Area */}
