@@ -25,6 +25,10 @@ const serviceCategories: ServiceCategory[] = [
         items: ['Whole-Home Generator Installation', 'Backup Power Systems', 'Generator Maintenance'],
     },
     {
+        title: 'Lighting & Fixtures',
+        items: ['LED & Recessed Lighting', 'Chandeliers & Ceiling Fans', 'Landscape & Security Lighting'],
+    },
+    {
         title: 'Commercial Electrical',
         items: ['Office & Retail Wiring', 'Lighting Retrofits', 'Electrical Code Compliance'],
     },
@@ -112,7 +116,7 @@ export function Footer({ businessName, phone, cleanPhone, accentColor }: FooterP
                             <li className="space-y-3">
                                 <div className="flex items-start gap-3 text-sm text-zinc-400">
                                     <MapPin className="w-4 h-4 text-zinc-600 flex-shrink-0 mt-0.5" />
-                                    <span>Houston, Katy, Sugar Land, Richmond, The Woodlands & Cypress</span>
+                                    <span>Houston, South Houston, Pasadena, Pearland, Sugar Land, League City, Deer Park, La Porte & Surrounding Areas</span>
                                 </div>
                                 <div className="flex items-start gap-3 text-sm text-zinc-400">
                                     <Clock className="w-4 h-4 text-zinc-600 flex-shrink-0 mt-0.5" />

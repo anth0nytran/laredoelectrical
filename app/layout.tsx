@@ -14,14 +14,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.landeros-electrical.com'),
-  title: "Houston Residential Electrician | Panel Upgrades & Emergency Repairs | Landeros Electrical",
-  description: "Houston's trusted home electrician. Emergency repairs, panel upgrades & preventative maintenance. Honest pricing, no surprises. Licensed & insured. Call (832) 812-0189.",
+  title: "Houston Electrician | Panel Upgrades, Lighting & Generators | Landeros Electrical",
+  description: "Houston's trusted electrician for panel upgrades, lighting installation, generators & emergency repairs. Serving Pearland, Pasadena, Sugar Land & Bay Area. Call (832) 812-0189.",
+  keywords: ["Houston Electrician", "Panel Upgrade", "Generator Installation", "Lighting Installation", "Electrical Repair", "South Houston Electrician", "Pearland Electrician", "Pasadena Electrician", "League City Electrician", "Sugar Land Electrician"],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "Houston Residential Electrician | Landeros Electrical Services",
-    description: "Expert home electrical service in Houston. Emergency repairs, panel upgrades & generator installation. Honest pricing guaranteed.",
+    title: "Houston Electrician | Lighting, Panels & Generators | Landeros Electrical",
+    description: "Expert home electrical service in Houston & Bay Area. Emergency repairs, lighting design, panel upgrades & generators. Licensed & insured.",
     url: 'https://www.landeros-electrical.com',
     siteName: 'Landeros Electrical Services',
     images: [
@@ -37,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Houston Residential Electrician | Landeros Electrical",
-    description: "Emergency repairs, panel upgrades & generator installation. Honest pricing guaranteed. Call (832) 812-0189.",
+    title: "Houston Electrician | Landeros Electrical Services",
+    description: "Emergency repairs, lighting, panels & generators. Serving Houston, Pearland, Pasadena & Bay Area. Call (832) 812-0189.",
     images: ['/images/laredohero.jpg'],
   },
   robots: {
@@ -80,7 +81,7 @@ export default function RootLayout({
               "logo": "https://www.landeros-electrical.com/images/reallaredo.svg",
               "url": "https://www.landeros-electrical.com",
               "telephone": "+18328120189",
-              "description": "Houston's trusted electrician. Professional service upgrades, generator installation, and troubleshooting.",
+              "description": "Houston's trusted electrician. Professional service upgrades, lighting installation, generator solutions, and troubleshooting.",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Houston Area",
@@ -103,8 +104,19 @@ export default function RootLayout({
               },
               "areaServed": [
                 { "@type": "City", "name": "Houston" },
-                { "@type": "City", "name": "Katy" },
+                { "@type": "City", "name": "South Houston" },
+                { "@type": "City", "name": "Pasadena" },
+                { "@type": "City", "name": "Pearland" },
+                { "@type": "City", "name": "League City" },
                 { "@type": "City", "name": "Sugar Land" },
+                { "@type": "City", "name": "Deer Park" },
+                { "@type": "City", "name": "La Porte" },
+                { "@type": "City", "name": "Webster" },
+                { "@type": "City", "name": "Clear Lake" },
+                { "@type": "City", "name": "Alvin" },
+                { "@type": "City", "name": "Manvel" },
+                { "@type": "City", "name": "Brookside Village" },
+                { "@type": "City", "name": "Katy" },
                 { "@type": "City", "name": "Richmond" },
                 { "@type": "City", "name": "Cypress" },
                 { "@type": "City", "name": "The Woodlands" }
@@ -129,10 +141,12 @@ export default function RootLayout({
                 "name": "Electrical Services",
                 "itemListElement": [
                   { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Service Panel Upgrades" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generator Installation" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generator Installation & ATS" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lighting & Fixture Installation" } },
                   { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrical Troubleshooting" } },
                   { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Emergency Repairs" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "EV Charger Installation" } }
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "EV Charger Installation" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wiring & Rewiring" } }
                 ]
               }
             })
