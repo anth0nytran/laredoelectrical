@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://www.landersoelectrical.com';
+    const baseUrl = 'https://www.landeroselectrical.com';
 
     return [
         {
