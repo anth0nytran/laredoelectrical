@@ -205,7 +205,18 @@ export default function LanderosElectrical() {
   const [formError, setFormError] = useState('');
   const [pageUrl, setPageUrl] = useState('');
   const [selectedService, setSelectedService] = useState('');
+  const [phoneValue, setPhoneValue] = useState('');
   const formLoadedAt = useRef(Date.now().toString());
+
+  // Auto-format phone as user types: (832) 812-0189
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+    let formatted = '';
+    if (digits.length > 6) formatted = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+    else if (digits.length > 3) formatted = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    else if (digits.length > 0) formatted = `(${digits}`;
+    setPhoneValue(formatted);
+  };
 
 
 
@@ -275,6 +286,7 @@ export default function LanderosElectrical() {
 
     if (honeypot) {
       form.reset();
+      setPhoneValue('');
       setFormStatus('success');
       return;
     }
@@ -299,6 +311,7 @@ export default function LanderosElectrical() {
       }
 
       form.reset();
+      setPhoneValue('');
       setFormStatus('success');
     } catch (error) {
       setFormStatus('error');
@@ -473,7 +486,7 @@ export default function LanderosElectrical() {
                 <input type="hidden" name="_ts" value={formLoadedAt.current} />
                 <div className="grid grid-cols-2 gap-4">
                   <div><label className="block text-xs font-semibold mb-1" style={{ color: t.textSecondary }}>Name *</label><input required name="name" type="text" placeholder="Your Name" className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2" style={{ backgroundColor: t.surfaceBg, borderColor: t.border, color: t.textPrimary, '--tw-ring-color': accent } as React.CSSProperties} /></div>
-                  <div><label className="block text-xs font-semibold mb-1" style={{ color: t.textSecondary }}>Phone *</label><input required name="phone" type="tel" placeholder="(281) 555-0123" className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2" style={{ backgroundColor: t.surfaceBg, borderColor: t.border, color: t.textPrimary, '--tw-ring-color': accent } as React.CSSProperties} /></div>
+                  <div><label className="block text-xs font-semibold mb-1" style={{ color: t.textSecondary }}>Phone *</label><input required name="phone" type="tel" placeholder="(281) 555-0123" value={phoneValue} onChange={handlePhoneChange} className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2" style={{ backgroundColor: t.surfaceBg, borderColor: t.border, color: t.textPrimary, '--tw-ring-color': accent } as React.CSSProperties} /></div>
                 </div>
                 <div><label className="block text-xs font-semibold mb-1" style={{ color: t.textSecondary }}>Email *</label><input required name="email" type="email" placeholder="you@email.com" className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2" style={{ backgroundColor: t.surfaceBg, borderColor: t.border, color: t.textPrimary, '--tw-ring-color': accent } as React.CSSProperties} /></div>
                 <div><label className="block text-xs font-semibold mb-1" style={{ color: t.textSecondary }}>Service Needed *</label><select required name="service" value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2" style={{ backgroundColor: t.surfaceBg, borderColor: t.border, color: t.textPrimary, '--tw-ring-color': accent } as React.CSSProperties}><option value="">Select a service...</option>{allServices.map(category => (<optgroup key={category.name} label={category.name}>{category.subItems.map(item => (<option key={item} value={item}>{item}</option>))}</optgroup>))}<option value="Other">Other</option></select></div>
