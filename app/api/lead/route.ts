@@ -55,6 +55,67 @@ const parseBody = async (req: Request): Promise<Record<string, unknown>> => {
   return data;
 };
 
+// ── Spam detection ──────────────────────────────────────────────────────────
+const SPAM_KEYWORDS = [
+  'seo', 'backlink', 'search engine', 'ranking', 'indexed', 'organic reach',
+  'web design', 'redesign', 'website traffic', 'google visibility',
+  'domain authority', 'off-page', 'on-page', 'meta tags', 'keyword',
+  'link building', 'serp', 'search register', 'online presence',
+  'digital marketing', 'search results', 'search indexing', 'website audit',
+  'page speed', 'site audit', 'improve your website', 'boost your',
+  'grow your website', 'web developer', 'web development',
+];
+
+const SELF_DOMAINS = [
+  'landeroselectrical.com',
+  'landersoelectrical.com',
+  'landeroselectrical',
+  'laredoselectrical',
+];
+
+function detectSpam(fields: {
+  phone: string;
+  message: string;
+  ts: string;
+}): boolean {
+  const { phone, message, ts } = fields;
+
+  // Layer 1 — Time-gating: reject if form submitted in < 3 seconds
+  if (ts) {
+    const submitted = parseInt(ts, 10);
+    if (!isNaN(submitted)) {
+      const elapsed = Date.now() - submitted;
+      if (elapsed < 3000) return true; // too fast — bot
+    }
+  }
+
+  // Layer 2 — Phone validation: require at least 10 digits (US format)
+  const phoneDigits = phone.replace(/\D/g, '');
+  if (phoneDigits.length < 10) return true;
+
+  // Layer 3 — URL detection in message
+  if (message && /https?:\/\/|www\./i.test(message)) return true;
+
+  // Layer 4 — Keyword blocklist
+  if (message) {
+    const lower = message.toLowerCase();
+    for (const kw of SPAM_KEYWORDS) {
+      if (lower.includes(kw)) return true;
+    }
+  }
+
+  // Layer 5 — Self-domain reference
+  if (message) {
+    const lower = message.toLowerCase();
+    for (const domain of SELF_DOMAINS) {
+      if (lower.includes(domain)) return true;
+    }
+  }
+
+  return false;
+}
+
+// ── POST handler ────────────────────────────────────────────────────────────
 export async function POST(req: Request) {
   let data: Record<string, unknown>;
   try {
@@ -76,6 +137,7 @@ export async function POST(req: Request) {
   const service = pickField(data, ['service', 'serviceNeeded', 'service_needed']);
   const page = pickField(data, ['page', 'pageUrl', 'page_url']);
   const site = pickField(data, ['site', 'siteUrl', 'site_url']);
+  const ts = pickField(data, ['_ts']);
 
   if (!name || !phone || !email || !service) {
     return NextResponse.json(
@@ -89,6 +151,11 @@ export async function POST(req: Request) {
       { ok: false, error: 'Message is too long. Please keep it under 5000 characters.' },
       { status: 400 }
     );
+  }
+
+  // Silently reject spam — respond 200 so bots don't adapt
+  if (detectSpam({ phone, message, ts })) {
+    return NextResponse.json({ ok: true }, { status: 200 });
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;

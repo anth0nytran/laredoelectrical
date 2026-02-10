@@ -205,6 +205,7 @@ export default function LanderosElectrical() {
   const [formError, setFormError] = useState('');
   const [pageUrl, setPageUrl] = useState('');
   const [selectedService, setSelectedService] = useState('');
+  const formLoadedAt = useRef(Date.now().toString());
 
 
 
@@ -469,6 +470,7 @@ export default function LanderosElectrical() {
               <form className="space-y-4" action="/api/lead" method="POST" onSubmit={handleLeadSubmit}>
                 <input type="text" name="website" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
                 <input type="hidden" name="page" value={pageUrl} />
+                <input type="hidden" name="_ts" value={formLoadedAt.current} />
                 <div className="grid grid-cols-2 gap-4">
                   <div><label className="block text-xs font-semibold mb-1" style={{ color: t.textSecondary }}>Name *</label><input required name="name" type="text" placeholder="Your Name" className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2" style={{ backgroundColor: t.surfaceBg, borderColor: t.border, color: t.textPrimary, '--tw-ring-color': accent } as React.CSSProperties} /></div>
                   <div><label className="block text-xs font-semibold mb-1" style={{ color: t.textSecondary }}>Phone *</label><input required name="phone" type="tel" placeholder="(281) 555-0123" className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2" style={{ backgroundColor: t.surfaceBg, borderColor: t.border, color: t.textPrimary, '--tw-ring-color': accent } as React.CSSProperties} /></div>
